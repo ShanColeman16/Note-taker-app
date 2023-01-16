@@ -12,6 +12,23 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: false }));
 app.use(express.json());
 
+app.get('/api/notes', (req,res) => {
+  const data = fs.readFileSync('./db/db.json', 'utf-8');
+  const notes = JSON.parse(data);
+  res.json(notes);
+ });
+
+ app.post('/api/notes', (req,res) => {
+  const data = fs.readFileSync('./db/db.json', 'utf-8');
+  const notes = JSON.parse(data);
+  const newNote = {
+    ...req.body,
+    id: uuid4()
+  };
+
+  res.json('Saved');
+ });
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
