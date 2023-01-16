@@ -13,11 +13,11 @@ app.use(express.urlencoded({extended: false }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.sendFile(join.path(__dirname, './public/index.html'));
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 app.get('/notes', (req, res) => {
-  res.sendFile(join.path(__dirname, './public/notes.html'));
+  res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
-app.listen(PORT);
+app.listen(PORT, () => console.log('runing at port 3001'));
