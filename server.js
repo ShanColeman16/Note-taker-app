@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const { join } = require('path');
 const path = require('path');
 
 const PORT = process.env.PORT || 3001;
@@ -12,7 +13,11 @@ app.use(express.urlencoded({extended: false }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Note Taker');
+  res.sendFile(join.path(__dirname, './public/index.html'));
+});
+
+app.get('/notes', (req, res) => {
+  res.sendFile(join.path(__dirname, './public/notes.html'));
 });
 
 app.listen(PORT);
