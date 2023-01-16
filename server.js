@@ -21,11 +21,14 @@ app.get('/api/notes', (req,res) => {
  app.post('/api/notes', (req,res) => {
   const data = fs.readFileSync('./db/db.json', 'utf-8');
   const notes = JSON.parse(data);
-  const newNote = {
+  const newNotes = {
     ...req.body,
     id: uuid4()
   };
 
+  notes.push(newNotes);
+  const stringifyedNotes = JSON.stringify(notes, null, 2);
+  fs.writeFileSync('./db/db.json', 'utf8');
   res.json('Saved');
  });
 
